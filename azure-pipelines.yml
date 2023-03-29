@@ -31,3 +31,17 @@ stages:
     - task: PublishPipelineArtifact@1
       inputs:
           artifactName: # 'drop'
+    - task: SonarQubePrepare@5
+      inputs:
+        SonarQube: 'YourSonarqubeServerEndpoint'
+        scannerMode: 'CLI'
+        configMode: 'manual'
+        cliProjectKey: 'YourProjectKey'
+
+    # Run Code Analysis task
+    - task: SonarQubeAnalyze@5
+
+    # Publish Quality Gate Result task
+    - task: SonarQubePublish@5
+      inputs:
+        pollingTimeoutSec: '300'
