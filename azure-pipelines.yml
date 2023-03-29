@@ -31,17 +31,3 @@ stages:
     - task: PublishPipelineArtifact@1
       inputs:
           artifactName: # 'drop'
-    - task: SonarQubePrepare@5
-      inputs:
-        SonarQube: 'http://localhost:9000'
-        scannerMode: 'CLI'
-        configMode: 'manual'
-        cliProjectKey: 'Unyleya_Projeto_DevOps_Unyleya_Projeto_DevOps_AYcuX9hTu5SL5-wIF0kB'
-
-    # Run Code Analysis task
-    - task: SonarQubeAnalyze@5
-
-    # Publish Quality Gate Result task
-    - task: SonarQubePublish@5
-      inputs:
-        pollingTimeoutSec: '300'
