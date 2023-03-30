@@ -6,8 +6,6 @@
 trigger:
 - main
 
-pool: Maritucs Agent Pool
-
 resources:
 - repo: self
 
@@ -20,8 +18,7 @@ stages:
   jobs:
   - job: Build
     displayName: Build
-    pool:
-      vmImage: ubuntu-latest
+    pool: Maritucs Pipelines
     steps:
     - task: SonarQubePrepare@5
       inputs:
