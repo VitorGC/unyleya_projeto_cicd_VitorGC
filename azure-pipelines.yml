@@ -6,6 +6,8 @@
 trigger:
 - main
 
+pool: Maritucs Agent Pool
+
 resources:
 - repo: self
 
