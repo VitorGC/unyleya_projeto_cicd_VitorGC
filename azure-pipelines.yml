@@ -21,6 +21,19 @@ stages:
     pool:
       vmImage: ubuntu-latest
     steps:
+    - task: SonarQubePrepare@5
+      inputs:
+        SonarQube: 'Azure SonarKube DevOps'
+        scannerMode: 'CLI'
+        configMode: 'manual'
+        cliProjectKey: 'Unyleya_Projeto_DevOps_Unyleya_Projeto_DevOps_AYcz6r2FZLXq2z2RSxHe'
+        cliProjectName: 'Unyleya_Projeto_DevOps'
+        cliSources: '$(System.DefaultWorkingDirectory)'
+
+    - powershell: |
+        $params = "$env:SONARQUBE_SCANNER_PARAMS" -replace '"sonar.branch.name":"[\w/,-.]*"\,?'
+        Write-Host "##vso[task.setvariable variable=SONARQUBE_SCANNER_PARAMS]$params"
+
     - task: Docker@2
       displayName: Build an image
       inputs:
@@ -28,6 +41,10 @@ stages:
         dockerfile: '$(Build.SourcesDirectory)/azure-vote/Dockerfile'
         tags: |
           $(tag)
+    - task: SonarQubeAnalyze@5
+    - task: SonarQubePublish@5
+      inputs:
+        pollingTimeoutSec: '300'
     - task: PublishPipelineArtifact@1
       inputs:
           artifactName: # 'drop'
