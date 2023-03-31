@@ -13,7 +13,7 @@ spec:
         app: azure-vote-back
     spec:
       nodeSelector:
-        "terraform-3gtlcwwq.hcp.eastus.azmk8s.io": linux
+        "beta.kubernetes.io/os": linux
       containers:
       - name: azure-vote-back
         image: mcr.microsoft.com/oss/bitnami/redis:latest
@@ -54,7 +54,7 @@ spec:
         app: azure-vote-front
     spec:
       nodeSelector:
-        "terraform-3gtlcwwq.hcp.eastus.azmk8s.io": linux
+        "beta.kubernetes.io/os": linux
       containers:
       - name: azure-vote-front
         image: mcr.microsoft.com/azuredocs/azure-vote-front:v1
@@ -79,3 +79,4 @@ spec:
   - port: 80
   selector:
     app: azure-vote-front
+
