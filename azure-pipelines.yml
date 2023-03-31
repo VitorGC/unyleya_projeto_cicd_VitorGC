@@ -44,8 +44,11 @@ stages:
     - task: SonarQubePublish@5
       inputs:
         pollingTimeoutSec: '300'
+    - task: CopyFiles@2
+      inputs:
+        contents: '_buildOutput/**'
+        targetFolder: $(Build.ArtifactStagingDirectory)
     - task: PublishPipelineArtifact@1
       inputs:
-          artifactName: 'drop'
-
-
+        pathToPublish: $(Build.ArtifactStagingDirectory)
+        artifactName: 'drop'
